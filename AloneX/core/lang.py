@@ -1,9 +1,7 @@
 # Copyright (c) 2025 TheHamkerAlone
 # Licensed under the MIT License.
-# This file is part of AloneXMusic
-# ALONE-CODER
-# @ForRealAlone
-# @XoDrk
+# This file is part of AloneX
+
 
 import json
 from functools import wraps
@@ -26,6 +24,7 @@ lang_codes = {
     "pt": "Portuguese",
     "ru": "Russian",
     "zh": "Chinese",
+    "mm": "Burmese",
 }
 
 
@@ -43,14 +42,8 @@ class Language:
         languages = {}
         lang_files = {file.stem: file for file in self.lang_dir.glob("*.json")}
         for lang_code, lang_file in lang_files.items():
-            try:
-                with open(lang_file, "r", encoding="utf-8") as file:
-                    languages[lang_code] = json.load(file)
-            except Exception as e:
-                logger.critical(
-                    f"Failed to load localization file: {lang_file}. Error: {e}"
-                )
-                continue
+            with open(lang_file, "r", encoding="utf-8") as file:
+                languages[lang_code] = json.load(file)
         logger.info(f"Loaded languages: {', '.join(languages.keys())}")
         return languages
 
